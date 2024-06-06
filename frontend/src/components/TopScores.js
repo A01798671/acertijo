@@ -5,7 +5,7 @@ const TopScores = () => {
   const [scores, setScores] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/top-scores')
+    axios.get('http://10.48.91.196:5000/top-scores')
       .then(response => {
         setScores(response.data);
       })
@@ -15,24 +15,16 @@ const TopScores = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Top 10 Scores</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Time (seconds)</th>
-          </tr>
-        </thead>
-        <tbody>
-          {scores.map((score, index) => (
-            <tr key={index}>
-              <td>{score.name}</td>
-              <td>{score.time}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="bg-gray-800 p-4 rounded-md">
+      <h2 className="text-xl font-bold mb-4">Top 10 Scores</h2>
+      <ol className="space-y-2">
+        {scores.map((score, index) => (
+          <li key={index} className="flex items-center justify-between">
+            <span>{index + 1}. {score.name}</span>
+            <span className="font-bold">{score.time} puntos</span>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 };
