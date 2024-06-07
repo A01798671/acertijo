@@ -55,6 +55,11 @@ Este proyecto es una página web de un acertijo matemático donde los usuarios d
    export default config;
    ```
 
+   Esto es con la finalidad de que en su telefono movil, en su navegador (safari o chrome), puedan acceder a la página web.
+   Cabe aclarar que para esto, la computadora donde corran el servidor y el telefono movil deben estar en la misma red de internet.
+   Para entrar a la página web en el telefono se debe entrar a la dirección: http://YOUR_IP_ADDRESS:3000
+   
+
 ## Ejecución
 
 1. Inicia el servidor backend:
