@@ -15,8 +15,8 @@ Este proyecto es un juego de acertijos matemáticos donde los usuarios deben adi
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/acertijo-matematico.git
-   cd acertijo-matematico
+   git clone https://github.com/A01798671/acertijo.git
+   cd acertijo
    ```
 
 2. Instala las dependencias del servidor backend:
@@ -40,6 +40,7 @@ Este proyecto es un juego de acertijos matemáticos donde los usuarios deben adi
    ```bash
    mongod
    ```
+   O bien puedes abrir MongoDBCompass, y con esta URL: mongodb://localhost:27017 dar click en conect.
 
 5. Configura la IP de tu computadora:
 
