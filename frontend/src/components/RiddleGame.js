@@ -3,50 +3,67 @@ import axios from 'axios';
 import Timer from './Timer';
 import Message from './Message';
 import TopScores from './TopScores';
+import config from './config'; // Importar configuración
 
+/**
+ * Componente principal del juego de acertijos.
+ */
 const RiddleGame = () => {
-  const [showRiddle, setShowRiddle] = useState(false);
-  const [showMessage, setShowMessage] = useState('');
-  const [timeUp, setTimeUp] = useState(false);
-  const [showScores, setShowScores] = useState(false);
-  const [remainingTime, setRemainingTime] = useState(60);
-  const [answer, setAnswer] = useState('');
-  const [gameOver, setGameOver] = useState(false); // Para manejar el estado del juego
-  const [scoreMessage, setScoreMessage] = useState(''); // Mensaje para puntajes
+  // Estado del componente para manejar la lógica del juego
+  const [showRiddle, setShowRiddle] = useState(false); // Controla si se muestra el acertijo
+  const [showMessage, setShowMessage] = useState(''); // Mensaje para mostrar el estado del juego
+  const [showScores, setShowScores] = useState(false); // Controla si se muestran los puntajes
+  const [remainingTime, setRemainingTime] = useState(60); // Tiempo restante para el acertijo
+  const [answer, setAnswer] = useState(''); // Respuesta del usuario
+  const [gameOver, setGameOver] = useState(false); // Indica si el juego ha terminado
+  const [scoreMessage, setScoreMessage] = useState(''); // Mensaje para mostrar el estado de los puntajes
 
+  // Respuesta correcta para el acertijo
   const correctAnswer = "49";
 
+  /**
+   * Maneja el inicio del acertijo.
+   */
   const handleStart = () => {
     setShowRiddle(true);
-    setTimeUp(false);
     setShowMessage('');
     setShowScores(false);
     setGameOver(false);
     setScoreMessage('');
   };
 
+  /**
+   * Maneja la respuesta del usuario.
+   * @param {Object} event - El evento del formulario.
+   */
   const handleAnswer = (event) => {
     event.preventDefault();
     if (answer === correctAnswer) {
-      const name = prompt('Ganaste! Ingresa tu nombre:');
+      const name = prompt('¡Ganaste! Ingresa tu nombre:');
       const time = 60 - remainingTime;
-      axios.post('http://10.48.91.196:5000/winner', { name, time })
+      // Enviar la respuesta correcta al servidor para guardar el puntaje
+      axios.post(`${config.apiBaseUrl}/winner`, { name, time })
         .then(response => console.log(response.data))
         .catch(error => console.error('There was an error!', error));
-      setShowMessage('Ganaste! Tu puntaje ha sido guardado.');
-      setGameOver(true); // Indicar que el juego ha terminado
+      setShowMessage('¡Ganaste! Tu puntaje ha sido guardado.');
+      setGameOver(true);
     } else {
-      setShowMessage('Respuesta incorrecta, intenta de nuevo!');
+      setShowMessage('Respuesta incorrecta, intenta de nuevo.');
     }
   };
 
+  /**
+   * Maneja el tiempo agotado.
+   */
   const handleTimeUp = () => {
-    setTimeUp(true);
     setShowMessage('¡Se acabó el tiempo! Perdiste.');
     setShowRiddle(false);
-    setGameOver(true); // Indicar que el juego ha terminado
+    setGameOver(true);
   };
 
+  /**
+   * Maneja la visualización de los puntajes.
+   */
   const handleShowScores = () => {
     if (gameOver) {
       setShowScores(true);
@@ -56,12 +73,16 @@ const RiddleGame = () => {
     }
   };
 
+  /**
+   * Maneja la recarga de la página.
+   */
   const handleReload = () => {
-    window.location.reload(); // Recargar la página
+    window.location.reload();
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-500 to-purple-500 text-white">
+      {/* Muestra el botón para comenzar el acertijo si no se ha iniciado o el juego ha terminado */}
       {!showRiddle && !gameOver ? (
         <button onClick={handleStart} className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-4 py-2">
           Comenzar acertijo
@@ -79,12 +100,13 @@ const RiddleGame = () => {
               <div>
                 <h2 className="text-2xl font-bold">Descripción del Acertijo</h2>
                 <p className="mt-2 text-gray-300">
-                En un lago hay un espacio lleno  de lirios. Por cada día que pasa, los lirios se duplican. 
+                En un lago hay un espacio lleno de lirios. Por cada día que pasa, los lirios se duplican. 
                 Si los lirios tardan 50 días en cubrir todo el lago, ¿Cuántos días tardarán en cubrir la mitad del lago?
                 </p>
               </div>
               <div>
                 <h2 className="text-2xl font-bold">Ingresa tu Respuesta</h2>
+                {/* Formulario para ingresar la respuesta del usuario */}
                 {showRiddle && !gameOver && (
                   <form onSubmit={handleAnswer} className="mt-2 flex items-center space-x-4">
                     <input
@@ -102,15 +124,18 @@ const RiddleGame = () => {
                     </button>
                   </form>
                 )}
+                {/* Temporizador del acertijo */}
                 {showRiddle && !gameOver && (
                   <Timer initialTime={60} onTimeUp={handleTimeUp} setRemainingTime={setRemainingTime} />
                 )}
+                {/* Mostrar mensaje al usuario */}
                 {showMessage && (
                   <div>
                     <Message text={showMessage} />
+                    {/* Botón para volver a la pantalla de inicio si el juego ha terminado */}
                     {gameOver && (
                       <button onClick={handleReload} className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-4 py-2 mt-4">
-                        Volver a la pantalla de inicio
+                        Volver a empezar
                       </button>
                     )}
                   </div>
@@ -120,12 +145,12 @@ const RiddleGame = () => {
           </div>
           <div className="mt-8 space-y-6">
             <div>
-              <h2 className="text-2xl font-bold">Instrucciones y Reglas</h2>
+              <h2 className="text-2xl font-bold">Instrucciones</h2>
               <div className="mt-2 space-y-2 text-gray-300">
-                <p>1. Cada jugador tiene un número en la frente, pero no puede ver su propio número.</p>
-                <p>2. Los jugadores pueden ver los números de los demás jugadores.</p>
-                <p>3. Los jugadores deben adivinar su propio número basándose en la información que tienen sobre los números de los demás.</p>
-                <p>4. El primer jugador en adivinar correctamente su número gana el juego.</p>
+                <p>1. Lee la descripción del acertijo.</p>
+                <p>2. Piensa la respuesta correcta y escribela en la sección "Ingresa tu Respuesta".</p>
+                <p>3. Da click en el botón "Enviar" para verificarla.</p>
+                <p>4. En caso de tener la respuesta correcta, ingresa tu nombre para guardar tu puntuación.</p>
               </div>
             </div>
           </div>
@@ -134,8 +159,11 @@ const RiddleGame = () => {
               <h2 className="text-2xl font-bold">Puntajes y Clasificaciones</h2>
               <div className="mt-2 space-y-2 text-gray-300">
                 <p>¡Mira quiénes han resuelto este acertijo con éxito!</p>
+                {/* Botón para mostrar los puntajes */}
                 <button onClick={handleShowScores} className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md px-4 py-2">Mostrar Puntaje</button>
+                {/* Mensaje sobre la visualización de los puntajes */}
                 {scoreMessage && <p className="text-red-500 mt-2">{scoreMessage}</p>}
+                {/* Componente para mostrar los puntajes */}
                 {showScores && <TopScores />}
               </div>
             </div>
