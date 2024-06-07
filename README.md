@@ -87,4 +87,4 @@ Este proyecto es una página web de un acertijo matemático donde los usuarios d
 
 ## Ejemplo en video del proyecto en funcionamiento
 
-Para visualizar un video del proyecto en funcionamiento ingresa al siguiente link: 
+Para visualizar un video del proyecto en funcionamiento ingresa al siguiente link: https://youtu.be/OIKvlGURsjc
