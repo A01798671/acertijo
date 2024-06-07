@@ -3,12 +3,13 @@ Prueba Técnica para Reclutamiento de Programador Full Stack Cracking The Code_A
 
 ## Descripción del Proyecto
 
-Este proyecto es un juego de acertijos matemáticos donde los usuarios deben adivinar la respuesta correcta en un tiempo limitado. Los puntajes se guardan en una base de datos y se pueden ver los mejores puntajes.
+Este proyecto es una página web de un acertijo matemáticos donde los usuarios deben obtener la respuesta correcta en un tiempo limitado de 1 minuto. Los puntajes se guardan en una base de datos y se pueden visualizar los 10 mejores puntajes.
 
-## Requisitos
+## Requisitos para correr el proyecto en localhost
 
-- Node.js
-- MongoDB
+- Node.js (Para instalar Node.js se puede hacer a través de su página oficial en: https://nodejs.org/en/download/prebuilt-installer)
+- MongoDB (Para instalar MongoDB de manera gratuita se puede hacer a traves de su página oficial con la versión de comunidad: https://www.mongodb.com/try/download/community)
+- MongoDB Compass (Recomiendo instalar MongoDB Compass que es una herramienta gráfica para interactuar con ls base de datos MongoDB y facilita mucho ver los datos. Se puede instalar a traves de su página oficial: https://www.mongodb.com/products/tools/compass)
 
 ## Instalación
 
@@ -78,3 +79,7 @@ Este proyecto es un juego de acertijos matemáticos donde los usuarios deben adi
 - Ingresa tu respuesta en el campo de texto y haz clic en "Enviar".
 - Si ganas, se te pedirá que ingreses tu nombre para guardar tu puntaje.
 - Haz clic en "Mostrar Puntaje" para ver los mejores puntajes.
+
+## Ejemplo en video del proyecto en funcionamiento
+
+Para visualizar un video del proyecto en funcionamiento ingresa al siguiente link: 

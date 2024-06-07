@@ -1,3 +1,10 @@
+/**
+ * Archivo RiddleGame.js: Componente principal del juego de acertijos.
+ * Fecha de creación: 6 de junio, 2024
+ * Autor: Alberto Cebreros González
+ * Para: Cracking the Code
+ */
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import Timer from './Timer';
