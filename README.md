@@ -3,7 +3,7 @@ Prueba Técnica para Reclutamiento de Programador Full Stack Cracking The Code_A
 
 ## Descripción del Proyecto
 
-Este proyecto es una página web de un acertijo matemáticos donde los usuarios deben obtener la respuesta correcta en un tiempo limitado de 1 minuto. Los puntajes se guardan en una base de datos y se pueden visualizar los 10 mejores puntajes.
+Este proyecto es una página web de un acertijo matemático donde los usuarios deben obtener la respuesta correcta en un tiempo limitado de 1 minuto. Los puntajes se guardan en una base de datos y se pueden visualizar los 10 mejores puntajes.
 
 ## Requisitos para correr el proyecto en localhost
 
