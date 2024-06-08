@@ -9,7 +9,7 @@
 
 // Dirección base de la API
 const config = {
-  apiBaseUrl: 'http://10.48.91.196:5000'
+  apiBaseUrl: 'http://YOUR_IP_ADDRESS:5000'
 };
 
 // Exporta la configuración para que pueda ser utilizada en otros archivos
